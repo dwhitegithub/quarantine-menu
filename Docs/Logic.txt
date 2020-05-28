@@ -1,0 +1,52 @@
+﻿Report WeekMealsLeft(WeekNumber1, WeekNumber2)
+{
+	run SQL: #Food = SELECT COUNT(Food), Food FROM Menu WHERE WeekNumber IN (@1,@2)
+}
+WeekMealsLeft(WeekNumber1)	//Overload
+{
+	WeekMeelsLeft(WeekNumber1, 0)
+}
+
+For each @Food in #Food
+CalculateActualPantry(#Food.@Food, #Food.@MealCount)
+{
+	Switch (@Food)
+	{
+		(Chowder, RiceAndBeans)
+		{
+			Pantry.Corn - 1	* @MealCount
+		}
+		 Chili
+		{
+			Pantry.Corn - 1	* @MealCount
+			if Dinner 
+			{
+				Pantry.BurgerBun - 1	* @MealCount
+			}
+		}
+		 EggplantParm
+		{
+			Pantry.Corn - 2	* @MealCount
+			Pantry.GreenBeans - 2	* @MealCount
+		}
+		 Kippers
+		{
+			Pantry.BurgerBun - 1	* @MealCount
+		}
+		 Sausages
+		{
+			Pantry.HotDogRolls-2	* @MealCount
+		}
+		Pantry.@Food - 1	* @MealCount
+	}
+}
+
+
+
+Public List BuildMealEventList(int Month)
+{
+	//select * AS MonthMenus from Menu where Month(Date) == Month
+	//for each Date  in MonthMenus create Event
+	//add Event to EventList
+	//Return EventList
+}
