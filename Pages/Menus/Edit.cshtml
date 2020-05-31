@@ -15,18 +15,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Menu.MenuID" />
             <div class="form-group">
-                <label asp-for="Menu.Date" class="control-label"></label>
-                <input asp-for="Menu.Date" class="form-control" />
-                <span asp-validation-for="Menu.Date" class="text-danger"></span>
+                <label  class="control-label">Date</label>
+                <input asp-for="Menu.MealDate" class="form-control"  />
+                <span asp-validation-for="Menu.MealDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Menu.MealID" class="control-label"></label>
-                <input asp-for="Menu.MealID" class="form-control" />
+                <label  class="control-label">Meal</label>
+                @Html.DropDownList("Menu.MealKindID", (IEnumerable<SelectListItem>)ViewBag.MealKinds)
+                @*<input asp-for="Menu.MealID" class="form-control" />*@
                 <span asp-validation-for="Menu.MealID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Menu.FoodID" class="control-label"></label>
-                <input asp-for="Menu.FoodID" class="form-control" />
+                <label  class="control-label">Food</label>
+                @Html.DropDownList("Menu.FoodID", (IEnumerable<SelectListItem>)ViewBag.Foods)
+                @*<input asp-for="Menu.FoodID" class="form-control" />*@
                 <span asp-validation-for="Menu.FoodID" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -40,7 +40,18 @@ namespace QuarantineMenu.Pages.Foods
                 return Page();
             }
 
+            // NO DUPLICATES
+            var foods = _context.Food
+                .AsEnumerable()
+                .Where(b => b.Name == Food.Name)
+                .ToList();
 
+            if(foods.Count > 0)
+            {
+                return RedirectToPage("./Index");
+            }
+
+            // Add New Food
             _context.Food.Add(Food);
             await _context.SaveChangesAsync();
 

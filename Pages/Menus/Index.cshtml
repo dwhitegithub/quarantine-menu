@@ -14,13 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Menu[0].Date)
+                Date
+                @*@Html.DisplayNameFor(model => model.Menu[0].MealDate)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Menu[0].MealID)
+                Meal
+                @*@Html.DisplayNameFor(model => model.Menu[0].MealID)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Menu[0].FoodID)
+                Food
+                @*@Html.DisplayNameFor(model => model.Menu[0].FoodID)*@
             </th>
             <th></th>
         </tr>
@@ -29,13 +32,17 @@
 @foreach (var item in Model.Menu) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @*@Html.DisplayFor(modelItem => item.Date)*@
+                @if(item.MealDate != null)
+                {
+                    @string.Format("{0:ddd MM/dd}", item.MealDate);
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MealID)
+                @Html.DisplayFor(modelItem => item.MealKind.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FoodID)
+                @Html.DisplayFor(modelItem => item.Food.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.MenuID">Edit</a> |

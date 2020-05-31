@@ -20,6 +20,8 @@ namespace QuarantineMenu.Pages.Menus
         }
 
         public Menu Menu { get; set; }
+        public Food Food { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -34,6 +36,13 @@ namespace QuarantineMenu.Pages.Menus
             {
                 return NotFound();
             }
+
+            Food food = _context.Food.Find(Menu.FoodID);
+            MealKind mealKind = _context.MealKind.Find(Menu.MealID);
+
+            Menu.FoodName = food.Name;
+            Menu.MealKindName = mealKind.Name;
+
             return Page();
         }
     }

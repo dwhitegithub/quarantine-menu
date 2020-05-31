@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuarantineMenu.Data;
 using QuarantineMenu.Models;
+using QuarantineMenu.Extensions;
 
 namespace QuarantineMenu.Pages.Menus
 {
@@ -23,6 +24,8 @@ namespace QuarantineMenu.Pages.Menus
         [BindProperty]
         public Menu Menu { get; set; }
 
+
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -36,6 +39,13 @@ namespace QuarantineMenu.Pages.Menus
             {
                 return NotFound();
             }
+
+            List<MealKind> MealKindList = _context.MealKind.ToList();
+            ViewData["MealKinds"] = ListExtensions.ToSelectList(MealKindList, "MealKindID", "Name");
+
+            List<Food> FoodList = _context.Food.ToList();
+            ViewData["Foods"] = ListExtensions.ToSelectList(FoodList, "FoodID", "Name");
+
             return Page();
         }
 

@@ -20,10 +20,17 @@ namespace QuarantineMenu.Pages.Menus
         }
 
         public IList<Menu> Menu { get;set; }
+        public IList<Food> Food { get; set; }
+        public IList<MealKind> MealKind { get; set; }
 
         public async Task OnGetAsync()
         {
-            Menu = await _context.Menu.ToListAsync();
+            var menus = _context.Menu
+                .Include(f => f.MealKind)
+                .Include(f => f.Food)
+                .AsNoTracking();
+
+            Menu = await menus.ToListAsync();
         }
     }
 }

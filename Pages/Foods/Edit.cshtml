@@ -20,7 +20,7 @@
                 <span asp-validation-for="Food.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Food.FoodKindID" class="control-label"></label>
+                <label asp-for="Food.FoodKindID" class="control-label">Category</label>
                 @Html.DropDownList("Food.FoodKindID", (IEnumerable<SelectListItem>)ViewBag.FoodKinds)
                 @*<input asp-for="Food.FoodKindID" class="form-control" />*@
                 <span asp-validation-for="Food.FoodKindID" class="text-danger"></span>

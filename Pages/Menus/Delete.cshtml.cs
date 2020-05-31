@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -35,6 +36,13 @@ namespace QuarantineMenu.Pages.Menus
             {
                 return NotFound();
             }
+
+            Food food = _context.Food.Find(Menu.FoodID);
+            MealKind mealKind = _context.MealKind.Find(Menu.MealID);
+
+            Menu.FoodName = food.Name;
+            Menu.MealKindName = mealKind.Name;
+
             return Page();
         }
 
