@@ -42,12 +42,12 @@ namespace QuarantineMenu.Pages.Menus
             {
                 var menus = _context.Menu
                     .AsEnumerable()
-                    .Where(b => b.MealDate.ToShortDateString() == Menu.MealDate.ToShortDateString() && Menu.MealID == b.MealID)
+                    .Where(b => b.MealDate.ToShortDateString() == Menu.MealDate.ToShortDateString() && Menu.MealKindID == b.MealKindID)
                     .ToList();
 
                 if (menus != null)
                 {
-                    if (menus.Count > 0)
+                    if (menus.Count() > 0)
                     {
                         return RedirectToPage("./Index");
                     }

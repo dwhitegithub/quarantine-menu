@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using QuarantineMenu.Data;
 using QuarantineMenu.Models;
 
-namespace QuarantineMenu.Pages.MealKindID
+namespace QuarantineMenu.Pages.MealKinds
 {
     public class CreateModel : PageModel
     {

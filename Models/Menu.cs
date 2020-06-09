@@ -14,14 +14,20 @@ namespace QuarantineMenu.Models
         [DisplayFormat(DataFormatString = "{0:ddd MM/dd}") ]
         [Column("Date")]
         public DateTime MealDate { get; set; }
+
         [ForeignKey("MealKind")]
-        public int MealID { get; set; }
+        public int MealKindID { get; set; }
+
         [ForeignKey("Food")]
         public int FoodID { get; set; }
+
+        [NotMapped]
+        public int FoodCounts { get; set; }
         [NotMapped]
         public string MealKindName { get; set; }
         [NotMapped]
         public string FoodName { get; set; }
+
         public MealKind MealKind { get; set; }
         public Food Food { get; set; }
 

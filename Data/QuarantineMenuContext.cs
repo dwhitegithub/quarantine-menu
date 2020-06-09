@@ -13,6 +13,7 @@ namespace QuarantineMenu.Data
             : base(options)
         {
         }
+
         public DbSet<QuarantineMenu.Models.Food> Food { get; set; }
         public DbSet<QuarantineMenu.Models.FoodKind> FoodKind { get; set; }
         public DbSet<QuarantineMenu.Models.MealKind> MealKind { get; set; }
