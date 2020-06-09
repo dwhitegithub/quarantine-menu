@@ -9,6 +9,7 @@ namespace QuarantineMenu.Models
 {
     public class Food
     {
+
         [Key] 
         public int FoodID { get; set; }
 

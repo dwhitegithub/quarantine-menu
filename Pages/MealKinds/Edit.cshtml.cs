@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using QuarantineMenu.Data;
 using QuarantineMenu.Models;
 
-namespace QuarantineMenu.Pages.MealKindID
+namespace QuarantineMenu.Pages.MealKinds
 {
     public class EditModel : PageModel
     {

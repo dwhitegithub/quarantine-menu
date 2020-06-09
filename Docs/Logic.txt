@@ -1,4 +1,28 @@
-﻿Report WeekMealsLeft(WeekNumber1, WeekNumber2)
+﻿WeekCount Model
+MealDate
+List Pantry
+List Food
+
+[ForeignKey(Food)]
+public int FoodID
+[ForeignKey(MealKind)]
+public int MealKindID	
+[NotMapped]
+public string FoodName	 
+[NotMapped]
+public string MealName	
+[NotMapped]
+public string FoodKindName
+
+public Food Food
+public MealKind MealKind
+
+public int Week1
+public int Week2
+
+
+
+Report WeekMealsLeft(WeekNumber1, WeekNumber2)
 {
 	run SQL: #Food = SELECT COUNT(Food), Food FROM Menu WHERE WeekNumber IN (@1,@2)
 }

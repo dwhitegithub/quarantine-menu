@@ -1,0 +1,38 @@
+﻿@model List<QuarantineMenu.Models.FoodCount>
+    @*  QuarantineMenu.Pages.Components.WeekCount.WeekCountViewComponent
+        For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    *@
+
+
+    <table class="table skinnyDisplayWidget ">
+        <thead>
+            <tr>
+                <th>
+                    Food
+                </th>
+                <th>
+                    This Week
+                </th>
+                <th>
+                    Pantry
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PantryCount)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+

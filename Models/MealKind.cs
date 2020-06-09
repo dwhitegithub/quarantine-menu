@@ -8,6 +8,6 @@ namespace QuarantineMenu.Models
     public class MealKind
     {
         public int MealKindID { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; }       
     }
 }

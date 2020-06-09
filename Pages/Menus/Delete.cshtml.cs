@@ -38,7 +38,7 @@ namespace QuarantineMenu.Pages.Menus
             }
 
             Food food = _context.Food.Find(Menu.FoodID);
-            MealKind mealKind = _context.MealKind.Find(Menu.MealID);
+            MealKind mealKind = _context.MealKind.Find(Menu.MealKindID);
 
             Menu.FoodName = food.Name;
             Menu.MealKindName = mealKind.Name;
