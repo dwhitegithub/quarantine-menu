@@ -64,10 +64,19 @@ namespace QuarantineMenu.Pages.Menus
                 return Page();
             }
 
+            switch (Menu.MealKindID)
+            {
+                case 1:
+                    Menu.MealDate.AddHours(12);
+                    break;
+                case 2:
+                    Menu.MealDate.AddHours(18);
+                    break;
+            }
             _context.Menu.Add(Menu);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index");        
         }
     }
 }
