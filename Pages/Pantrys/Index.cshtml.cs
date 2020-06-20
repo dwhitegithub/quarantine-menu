@@ -28,6 +28,7 @@ namespace QuarantineMenu.Pages.Pantrys
         {
             var pantrys = _context.Pantry
                             .Include(f => f.Food)
+                            .OrderBy(f => f.Food.Name)
                             .AsNoTracking();
 
 

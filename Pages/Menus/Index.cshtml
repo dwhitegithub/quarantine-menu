@@ -6,13 +6,12 @@
 }
 
 <h1>Index</h1>
-
+<div>
+        @await Component.InvokeAsync("MenuCalendar")
+</div>
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<div class="float-right">
-    @await Component.InvokeAsync("WeekCount")
-</div>
 <div class="float-left">
     <table class="table">
         <thead>
@@ -57,8 +56,15 @@
                             <a asp-page="./Delete" asp-route-id="@item.MenuID">Delete</a>
                         </td>
                     </tr>
-                 }
+                }
             }
         </tbody>
     </table>
+
 </div>
+<div class="float-right">
+    @await Component.InvokeAsync("WeekCount")
+</div>
+<br />
+<br />
+<br />
