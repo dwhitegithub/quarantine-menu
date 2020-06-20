@@ -21,7 +21,14 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
+
+                var colorClass = "rowColor";
+                if (item.PantryCount <= 2)
+                {
+                    colorClass = "featureColor";
+                }
+
+            <tr class=@colorClass>
                 <td>
                     @Html.DisplayFor(modelItem => item.Food.Name)
                 </td>
@@ -35,4 +42,8 @@
             }
         </tbody>
     </table>
+<br />
+<br />
+<br />
+
 

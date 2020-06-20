@@ -28,6 +28,7 @@ namespace QuarantineMenu.Pages.Menus
             var menus = _context.Menu
                 .Include(f => f.MealKind)
                 .Include(f => f.Food)
+                .OrderBy(f => f.MealDate).ThenBy(f => f.MealKindID)
                 .AsNoTracking();
 
             Menu = await menus.ToListAsync();

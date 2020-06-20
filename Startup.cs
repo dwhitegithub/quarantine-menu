@@ -30,9 +30,10 @@ namespace QuarantineMenu
             services.AddRazorPages();
 
             services.AddDbContext<QuarantineMenuContext>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString("QuarantineMenuContext")));
+                    options.UseMySQL(Configuration.GetConnectionString("QuarantineMenuContext"))
+                   );
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

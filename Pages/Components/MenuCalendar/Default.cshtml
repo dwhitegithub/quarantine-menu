@@ -1,0 +1,110 @@
+﻿@model  List<QuarantineMenu.Models.Menu>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Default</title>
+</head>
+<body>
+    @{ DateTime varDay = new DateTime(); }
+
+    <div>
+        <table class="table calendarTable">
+            <tbody>
+                @foreach (var calDay in Model)
+                {
+                    if (calDay.MealDate != varDay)
+                    {
+                        @:</td>
+
+                        if (calDay.MealDate.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            @:</tr>
+                        }
+                        if (calDay.MealDate.DayOfWeek == DayOfWeek.Monday)
+                        {
+                            @:<tr class="calendarWeek">
+                        }
+                        @:<td class="calendarDay">
+                            @:<span class="calendarDayNumber">@calDay.MealDate.Day</span>
+                            @calDay.MealKind.Name <br />
+                            @calDay.Food.Name
+                    }
+                    varDay = calDay.MealDate;
+                }
+                        </td>
+                    </tr>
+            </tbody>
+            @*@foreach (var item in Model)*@
+            @*while (Model.MoveNext())
+            {
+            <tr class="calendarRow row1" id="week1">
+                <td class="calendarRow1 Sunday" id="week1.Sunday">
+
+                    Html.DisplayFor(modelItem => Model.FirstOrDefault().MealDate.Day.ToString());
+                    Html.DisplayFor(modelItem => Model.FirstOrDefault().MealKind.Name); Html.DisplayFor(modelItem => Model.FirstOrDefault().Food.Name);
+                    MoveNext();
+
+                </td>
+                <td class="calendarRow1 Monday" id="week1.Monday"></td>
+                <td class="calendarRow1 Tuesday" id="week1.Tuesday">></td>
+                <td class="calendarRow1 Wednesday" id="week1.Wednesday">></td>
+                <td class="calendarRow1 Thursday" id="week1.Thursday">></td>
+                <td class="calendarRow1 Friday" id="week1.Friday">></td>
+                <td class="calendarRow1 Saturday" id="week1.Saturday">></td>
+            </tr>
+            <tr class="calendarRow row2" id="week2">
+                <td class="calendarRow2 Sunday"></td>
+                <td class="calendarRow2 Monday"></td>
+                <td class="calendarRow2 Tuesday"></td>
+                <td class="calendarRow2 Wednesday"></td>
+                <td class="calendarRow2 Thursday"></td>
+                <td class="calendarRow2 Friday"></td>
+                <td class="calendarRow2 Saturday"></td>
+            </tr>
+            <tr class="calendarRow row3">
+                <td class="calendarRow3 Sunday"></td>
+                <td class="calendarRow3 Monday"></td>
+                <td class="calendarRow3 Tuesday"></td>
+                <td class="calendarRow3 Wednesday"></td>
+                <td class="calendarRow3 Thursday"></td>
+                <td class="calendarRow3 Friday"></td>
+                <td class="calendarRow3 Saturday"></td>
+            </tr>
+            <tr class="calendarRow row4">
+                <td class="calendarRow4 Sunday"></td>
+                <td class="calendarRow4 Monday"></td>
+                <td class="calendarRow4 Tuesday"></td>
+                <td class="calendarRow4 Wednesday"></td>
+                <td class="calendarRow4 Thursday"></td>
+                <td class="calendarRow4 Friday"></td>
+                <td class="calendarRow4 Saturday"></td>
+            </tr>
+            <tr class="calendarRow row5">
+                <td class="calendarRow5 Sunday"></td>
+                <td class="calendarRow5 Monday"></td>
+                <td class="calendarRow5 Tuesday"></td>
+                <td class="calendarRow5 Wednesday"></td>
+                <td class="calendarRow5 Thursday"></td>
+                <td class="calendarRow5 Friday"></td>
+                <td class="calendarRow5 Saturday"></td>
+            </tr>
+            <tr class="calendarRow row6">
+                <td class="calendarRow6 Sunday"></td>
+                <td class="calendarRow6 Monday"></td>
+                <td class="calendarRow6 Tuesday"></td>
+                <td class="calendarRow6 Wednesday"></td>
+                <td class="calendarRow6 Thursday"></td>
+                <td class="calendarRow6 Friday"></td>
+                <td class="calendarRow6 Saturday"></td>
+            </tr>
+            }*@
+        </table>
+    </div>
+</body>
+</html>

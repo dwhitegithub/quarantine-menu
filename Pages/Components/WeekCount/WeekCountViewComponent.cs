@@ -65,19 +65,21 @@ namespace QuarantineMenu.Pages.Components.WeekCount
 
 
             
-
+            // generate list of Meals on or after today
+            // Meals (Menu object) and Food 
             List<Menu> Menus = await _context.Menu
                 .Where(f => f.MealDate >= dtStart.Date)
                 .Include(f => f.Food)
                 .ToListAsync();
 
+           // count Foods from meals (Menus)
            var  MenusList = Menus.GroupBy(f => f.FoodID)
               .Select(g =>
                   new FoodCount()
                   {
                       FoodID = g.Key,
                       Count = g.Count()
-                  }
+                  }   
                );
 
             List<FoodCount> FoodCountList = new List<FoodCount>();
@@ -86,7 +88,7 @@ namespace QuarantineMenu.Pages.Components.WeekCount
             {
                 var varFood = from menu in Menus
                               where menu.FoodID == fc.FoodID
-                              select new { FoodID = menu.Food.FoodID, Name = menu.Food.Name, MealKindID = menu.MealKindID };
+                              select new { FoodID = menu.FoodID, Name = menu.Food.Name };
                 Food food = new Food() ;
                 food.FoodID = varFood.First().FoodID;
                 food.Name = varFood.First().Name;
@@ -94,7 +96,7 @@ namespace QuarantineMenu.Pages.Components.WeekCount
                 FoodCountList.Add(fc);
             }
           
-            foreach (FoodCount fcl in FoodCountList)
+            foreach (FoodCount fcl in FoodCountList.OrderBy(f => f.Food.Name))
             {
                 var pantryCount = from pantryItem in _pantryList
                                   where pantryItem.FoodID == fcl.FoodID

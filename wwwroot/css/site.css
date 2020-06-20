@@ -74,3 +74,13 @@ table.skinnyDisplayWidget {
     width: 200px;
     border: 1px solid blue;
 }
+
+.rowColor {
+   background-color:cornsilk;
+}
+.featureColor {
+    background-color: lightcyan;
+}
+table.calendarTable {
+    border: 1px solid black;
+}
