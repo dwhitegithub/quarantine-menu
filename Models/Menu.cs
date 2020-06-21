@@ -11,6 +11,8 @@ namespace QuarantineMenu.Models
     public class Menu
     {
         public int MenuID { get; set; }
+
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:ddd MM/dd}") ]
         [Column("Date")]
         public DateTime MealDate { get; set; }
