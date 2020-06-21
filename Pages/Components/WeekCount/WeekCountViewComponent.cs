@@ -90,8 +90,8 @@ namespace QuarantineMenu.Pages.Components.WeekCount
                               where menu.FoodID == fc.FoodID
                               select new { FoodID = menu.FoodID, Name = menu.Food.Name };
                 Food food = new Food() ;
-                food.FoodID = varFood.First().FoodID;
-                food.Name = varFood.First().Name;
+                food.FoodID = varFood.FirstOrDefault().FoodID;
+                food.Name = varFood.FirstOrDefault().Name;
                 fc.Food = food;
                 FoodCountList.Add(fc);
             }
@@ -106,8 +106,18 @@ namespace QuarantineMenu.Pages.Components.WeekCount
                     fcl.PantryCount = 0 ; 
                 }
                 else
-                { 
-                    fcl.PantryCount = (int)pantryCount.First().PantryCount ; 
+                {
+                    try
+                    {
+                        if (pantryCount.FirstOrDefault().PantryCount > -1)
+                        { fcl.PantryCount = (int)pantryCount.FirstOrDefault().PantryCount; }
+                        else
+                        { fcl.PantryCount = 0; }
+                    }
+                    catch(Exception ex)
+                    {
+                        fcl.PantryCount = 0;
+                    }
                 }
                 fcl.PantryCount = fcl.PantryCount - fcl.Count;
             }
