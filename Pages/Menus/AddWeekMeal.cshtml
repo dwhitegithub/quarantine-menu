@@ -18,26 +18,31 @@
     //    window.location = newUrl;
     //}
 </script>
-<h1>Index</h1>
-<div>
-    @await Component.InvokeAsync("MenuCalendar")
+<h1>Add Week</h1>
+
+<div class="float-right">
+    @await Component.InvokeAsync("WeekCount")
 </div>
-<p>
-    <form asp-page-handler="SetTargetDate" method="get">
-        <input id="tbTargetDate" name="tbTargetDate"  type="text" />
-        <button id="btnSetDate" class="btn btn-primary btn-default" value="submit" />  <span id="spanDateText" />
-        <input type="hidden" name="id" value="3" />
-    </form>
-</p>
-<div id="divCalendar" >
-   
+
+<div>
+    <p>
+        <form asp-page-handler="SetTargetDate" method="get">
+            <input id="tbTargetDate" name="tbTargetDate" type="text" />
+            <button id="btnSetDate" class="btn btn-primary btn-default" value="submit" />  <span id="spanDateText" />
+            <input type="hidden" name="id" value="3" />
+        </form>
+    </p>
+</div>
+<div id="divCalendar">
+
 </div>
 <div class="float-left">
     <table class="table">
+        <caption title="This Week's Meals" />
         <thead>
             <tr>
                 <th>
-                    Date
+                    This Week's<br /> Meals Date
                     @*@Html.DisplayNameFor(model => model.MenuList[0].MealDate)*@
                 </th>
                 <th>
@@ -62,6 +67,8 @@
                             @if (item.MealDate != null)
                             {
                                 @string.Format("{0:ddd MM/dd}", item.MealDate);
+                                <br />
+                                @item.MealDate.DayOfWeek;
                             }
                         </td>
                         <td>
@@ -82,9 +89,9 @@
     </table>
 
 </div>
-<div class="float-right">
-    @await Component.InvokeAsync("WeekCount")
+<br />
+<br />
+<br />
+<div>
+    @await Component.InvokeAsync("MenuCalendar")
 </div>
-<br />
-<br />
-<br />

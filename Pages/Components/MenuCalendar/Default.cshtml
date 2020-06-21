@@ -14,8 +14,9 @@
     @{ DateTime varDay = new DateTime(); }
 
     <div>
-        <table class="table calendarTable">
-            <tbody>
+        <table class="table calendarTable" >
+            <caption title="This Month's Menus" />
+            @*<tbody>
                 @foreach (var calDay in Model)
                 {
                     if (calDay.MealDate != varDay)
@@ -39,7 +40,7 @@
                 }
                         </td>
                     </tr>
-            </tbody>
+            </tbody>*@
             @*@foreach (var item in Model)*@
             @*while (Model.MoveNext())
             {

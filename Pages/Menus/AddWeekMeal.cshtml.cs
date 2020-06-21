@@ -39,8 +39,11 @@ namespace QuarantineMenu.Pages.Menus
                  .AsNoTracking();
 
             MenuList = await menus.ToListAsync();
+            
+            MenuList = GetCalendar(MenuList, StartDay);
+            MenuList.OrderBy(f => f.MealDate);
         }
-
+                                                                                                               
         public async Task OnGetSetTargetDate(string tbTargetDate)
         {
             string starter = tbTargetDate; 
@@ -55,6 +58,8 @@ namespace QuarantineMenu.Pages.Menus
                  .AsNoTracking();
 
             MenuList = await menus.ToListAsync();
+            MenuList = GetCalendar(MenuList, StartDay);
+            MenuList.OrderBy(f => f.MealDate);
         }
         public DateTime GetStartDay(DateTime TargetDate)
         {
@@ -64,30 +69,30 @@ namespace QuarantineMenu.Pages.Menus
             switch (myDayOfWeek)
             {
                 case DayOfWeek.Monday:
-                    dtEnd = dtStart.AddDays(7);
-                    break;
-                case DayOfWeek.Tuesday:
                     dtStart = dtStart.AddDays(-1);
                     dtEnd = dtStart.AddDays(7);
                     break;
-                case DayOfWeek.Wednesday:
+                case DayOfWeek.Tuesday:
                     dtStart = dtStart.AddDays(-2);
                     dtEnd = dtStart.AddDays(7);
                     break;
-                case DayOfWeek.Thursday:
+                case DayOfWeek.Wednesday:
                     dtStart = dtStart.AddDays(-3);
                     dtEnd = dtStart.AddDays(7);
                     break;
-                case DayOfWeek.Friday:
+                case DayOfWeek.Thursday:
                     dtStart = dtStart.AddDays(-4);
                     dtEnd = dtStart.AddDays(7);
                     break;
-                case DayOfWeek.Saturday:
+                case DayOfWeek.Friday:
                     dtStart = dtStart.AddDays(-5);
                     dtEnd = dtStart.AddDays(7);
                     break;
-                case DayOfWeek.Sunday:
+                case DayOfWeek.Saturday:
                     dtStart = dtStart.AddDays(-6);
+                    dtEnd = dtStart.AddDays(7);
+                    break;
+                case DayOfWeek.Sunday:
                     dtEnd = dtStart.AddDays(7);
                     break;
                 default:
@@ -95,6 +100,72 @@ namespace QuarantineMenu.Pages.Menus
             }
 
             return dtStart;
+        }
+
+        public IList<Menu> GetCalendar(IList<Menu> menuList, DateTime beginDate)
+        {
+            var myDays = menuList.GroupBy(f => f.MealDate)
+                .Select(g =>
+                  new WeekDayCount()
+                  {
+                      WeekDay = g.Key.DayOfWeek,
+                      Count = g.Count()
+                  }
+               );
+
+            List<WeekDayCount> weekDays = myDays.ToList();
+            
+            //Sunday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Sunday))
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate;
+                menuList.Insert(0,amenu);
+            }
+            //Monday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Monday) )
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(1);
+                menuList.Insert(1, amenu);
+            }
+            //Tuesday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Tuesday) )
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(2);
+                menuList.Insert(2, amenu);
+            }
+            //Wednesday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Wednesday) )
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(3);
+                menuList.Insert(3, amenu);
+            }
+            //Thursday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Thursday))
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(4);
+                menuList.Insert(4, amenu);
+            }
+            //Friday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Friday))
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(5);
+                menuList.Insert(5, amenu);
+            }
+            //Saturday
+            if (!weekDays.Exists(f => f.WeekDay == DayOfWeek.Saturday)  )
+            {
+                Menu amenu = new Menu();
+                amenu.MealDate = beginDate.AddDays(6);
+                menuList.Insert(6, amenu);
+            }
+
+            return menuList.OrderBy(f=>f.MealDate).ToList();          
         }
     }
 }
