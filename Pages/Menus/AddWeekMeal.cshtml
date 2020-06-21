@@ -1,7 +1,90 @@
-﻿@page
+﻿@page "{handler?}/{tbTargetDate?}"
 @model QuarantineMenu.Pages.Menus.AddWeekMealModel
 @{
 }
 @* week picker *@
 @*empty grid w/ add item row*@
 @* MenuID [Hidden], MealDate[DayOfWeek picker], Food.Name [picker]FoodID[hidden], MealKind.Name[picker]MealKindID[hidden] , buttons - Add Cancel  *@
+
+@{
+    ViewData["Title"] = "Add Meals For A Week";
+}
+<script type="text/javascript">
+
+    //function btnSetDate_Click()
+    //{
+    //    var dateString = document.getElementById("tbTargetDate").textContent;
+    //    string newUrl = window.location.pathname + "?d=" + dateString;
+    //    window.location = newUrl;
+    //}
+</script>
+<h1>Index</h1>
+<div>
+    @await Component.InvokeAsync("MenuCalendar")
+</div>
+<p>
+    <form asp-page-handler="SetTargetDate" method="get">
+        <input id="tbTargetDate" name="tbTargetDate"  type="text" />
+        <button id="btnSetDate" class="btn btn-primary btn-default" value="submit" />  <span id="spanDateText" />
+        <input type="hidden" name="id" value="3" />
+    </form>
+</p>
+<div id="divCalendar" >
+   
+</div>
+<div class="float-left">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Date
+                    @*@Html.DisplayNameFor(model => model.MenuList[0].MealDate)*@
+                </th>
+                <th>
+                    Meal
+                    @*@Html.DisplayNameFor(model => model.MenuList[0].MealKindID)*@
+                </th>
+                <th>
+                    Food
+                    @*@Html.DisplayNameFor(model => model.MenuList[0].FoodID)*@
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MenuList)
+            {
+                @if (item.MealDate != null)
+                {
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Date)*@
+                            @if (item.MealDate != null)
+                            {
+                                @string.Format("{0:ddd MM/dd}", item.MealDate);
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MealKind.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Food.Name)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.MenuID">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.MenuID">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.MenuID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+<div class="float-right">
+    @await Component.InvokeAsync("WeekCount")
+</div>
+<br />
+<br />
+<br />
